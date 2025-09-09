@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded' ()=>{
 
 
     const addTask=(event)=>{
+        event.preventDefault();
         const taskText=taskInput.value.trim(); 
         //trim() removes extra space from the start and the end of the strings 
         if(!taskText){
@@ -22,7 +23,13 @@ document.addEventListener('DOMContentLoaded' ()=>{
     }; 
     
     
-    //Time=> 9:00
+    addTaskBtn.addEventListener('click',addTask);
+    taskInput.addEventListener('keypress',(e)=>{
+        if(e.key==='Enter'){ //if use prsses the enter key 
+            addTask(e);
+        }
+    });
+
 
 
 });
