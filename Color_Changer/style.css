@@ -5,8 +5,8 @@
 @tailwind utilities;
 
 
-@layer{
-    .sakib{
-        @apply bg-blue-600 text-white text-5xl size-fit
+@layer components{
+    .btn-behave{
+        @apply border-2 rounded-2xl h-16 w-30
     }
 }
