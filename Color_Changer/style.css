@@ -7,6 +7,6 @@
 
 @layer components{
     .btn-behave{
-        @apply border-2 rounded-2xl h-16 w-30
+        @apply border-2 rounded-2xl h-16 w-30 cursor-pointer;
     }
 }
