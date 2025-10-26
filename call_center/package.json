@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^7.1.0",
+    "@fortawesome/free-brands-svg-icons": "^7.1.0",
+    "@fortawesome/free-regular-svg-icons": "^7.1.0",
+    "@fortawesome/free-solid-svg-icons": "^7.1.0",
+    "@fortawesome/react-fontawesome": "^3.1.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "remixicon": "^4.7.0",
+    "tailwindcss": "^4.1.14"
+  }
+}
