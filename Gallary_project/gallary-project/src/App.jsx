@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import Cards from './components/Cards';
 
 const App = () => {
 
   const [userData, setuserData] = useState([]);
+  const [index, setIndex] = useState(1);
 
   async function getData() {
-    const response = await axios.get('https://picsum.photos/v2/list?page=3&limit=30');
+    const response = await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=10`);
 
     setuserData(response.data);
 
@@ -14,20 +16,28 @@ const App = () => {
   }
 
 
-  let printUserData = "no user available";
+  // using useEffect to run every time
+  useEffect(() => {
+    getData();
+  }, [index]);
+
+
+  let printUserData = (
+    <div className="flex items-center justify-center h-screen gap-2 ">
+      <div className="w-6 h-6 border-4 border-stone-400 border-t-transparent rounded-full animate-spin"></div>
+      <h3 className="text-stone-500 text-xl">Loading . . .</h3>
+    </div>
+
+  );
 
 
   if (userData.length > 0) {
     printUserData = userData.map(function (elem, idx) {
 
       return (
+
         <div key={idx}>
-          <a href={elem.url} target='_blank'>
-            <div className='h-40 w-44 bg-white rounded-xl overflow-hidden'>
-              <img className='h-full w-full object-cover' src={elem.download_url} alt="" />
-            </div>
-            <h2 className='font-bold text-lg'>{elem.author}</h2>
-          </a>
+          <Cards elem={elem}/>
         </div>
 
       )
@@ -37,17 +47,38 @@ const App = () => {
 
 
   return (
+
+
     <div className='bg-black overflow-auto h-screen p-5  text-white'>
-      <button onClick={getData} className='bg-green-600 text-white px-5 py-2  rounded active:scale-90'>get data</button>
+
+      {/* <button onClick={getData} className='bg-green-600 text-white px-5 py-2  rounded active:scale-90'>get data</button> */}
 
 
-      <div className='flex flex-wrap gap-3' >
+      <div className='flex flex-wrap gap-3 p-2' >
         {printUserData}
       </div>
 
 
+      <div className='flex justify-center items-center gap-6 p-4'>
+        <button className='bg-amber-400 text-black rounded px-4 py-2 font-semibold cursor-pointer hover:bg-amber-300 active:bg-amber-200 active:scale-95' onClick={() => {
+          if (index > 1) {
+            setIndex(index - 1);
+            setuserData([]);
+          }
+        }}>Prev</button>
+        <h2 className='text-xl'>Page {index}</h2>
+        <button className='bg-amber-400 text-black rounded px-4 py-2 font-semibold cursor-pointer hover:bg-amber-300 active:bg-amber-200 active:scale-95' onClick={() => {
+          setIndex(index + 1);
+          setuserData([]);
+        }}>Next</button>
+      </div>
+
+
+
 
     </div>
+
+
 
 
 
