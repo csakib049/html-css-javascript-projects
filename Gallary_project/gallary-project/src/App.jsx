@@ -8,7 +8,7 @@ const App = () => {
   const [index, setIndex] = useState(1);
 
   async function getData() {
-    const response = await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=10`);
+    const response = await axios.get(`https://picsum.photos/v2/list?page=${index}&limit=36`);
 
     setuserData(response.data);
 
