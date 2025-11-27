@@ -1,5 +1,5 @@
-function abc(a){
-   return a+"kire ki obostha"
-}
+const data = require('./data');
 
-console.log(abc("sakib"));
+
+console.log(data);
+console.log(data.userName);
