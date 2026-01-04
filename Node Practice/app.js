@@ -1,16 +1,16 @@
-// const http = require('http');
+const colors = require('colors');
 
-// http.createServer((req,res)=>{
-     
-//      res.write("<h1> hello sakib </h1>");
-//      res.end("hello");// ending the server is compulsory 
-// }).listen(4800);
+colors.setTheme({
+  error:'red',
+  debug:'blue',
+  warn:'yellow',
+  help: 'cyan'
+});
+
+console.log('this is an error '.error);
+console.log('this is a debug '.debug);
+console.log('this is a help'.help);
+console.log('this my last warning '.warn);
 
 
-const http = require('http');
 
-http.createServer((req,res)=>{
-
-    res.write("<h1>is it working ......???</h1>");
-    res.end();
-}).listen(4800);
