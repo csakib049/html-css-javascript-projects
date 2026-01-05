@@ -1,7 +1,23 @@
 const http = require('http');
+const fs = require('fs');
 
-http.createServer((req,res)=>{
-    console.log(req.headers.host); // its running in the server not in the browser
-    res.write("<h1>Hi sakib </h1>");
-    res.end();
-}).listen(5600);
+http.createServer((req, resp) => {
+
+
+   fs.readFile('html/web.html', 'utf-8', (error, data) => {
+      if (error) {
+         resp.writeHead(500,{"content-type":'text-plain'});
+         resp.writable('internal server error');
+         resp.end();
+         return;
+      }
+
+      resp.writeHead(200, { "content-type": 'text/html' });
+      resp.write(data);
+      resp.end();
+   })
+
+
+
+
+}).listen(3200);
