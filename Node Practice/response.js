@@ -1,23 +1,26 @@
-const http = require('http');
-const fs = require('fs');
+const http= require('http');
+const fs= require('fs');
 
-http.createServer((req, resp) => {
+http.createServer((req,resp)=>{
 
+   fs.readFile('html/web.html','utf-8',(error,data)=>{
+      
+         
+         if(error){
+            resp.writeHead(500,{"content-type":'text/plain'});
+            resp.end("internal server error");
+            return;
+         }
 
-   fs.readFile('html/web.html', 'utf-8', (error, data) => {
-      if (error) {
-         resp.writeHead(500,{"content-type":'text-plain'});
-         resp.writable('internal server error');
+         resp.writeHead(200,{"content-type":"text/html"});
+         if(req.url=='/'){
+            resp.write(data);
+         }else if(req.url=='/submit'){
+            resp.write('<h1>Data submit</h1>');
+         }
          resp.end();
-         return;
-      }
-
-      resp.writeHead(200, { "content-type": 'text/html' });
-      resp.write(data);
-      resp.end();
    })
 
 
-
-
+   
 }).listen(3200);
