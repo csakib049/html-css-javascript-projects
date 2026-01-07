@@ -1,16 +1,8 @@
-const colors = require('colors');
+console.log("Start");
 
-colors.setTheme({
-  error:'red',
-  debug:'blue',
-  warn:'yellow',
-  help: 'cyan'
-});
+setTimeout(() => {
+  console.log("Middle");
+}, 1000);
 
-console.log('this is an error '.error);
-console.log('this is a debug '.debug);
-console.log('this is a help'.help);
-console.log('this my last warning '.warn);
-
-
-
+console.log("End");
+ 

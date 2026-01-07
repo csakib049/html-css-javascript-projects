@@ -18,17 +18,19 @@ http.createServer((req,resp)=>{
             resp.write(data);
          }else if(req.url=='/submit'){
 
-            let dataBody = [];
-            req.on('data',(chunk)=>{
-               dataBody.push(chunk);
-            });
-            req.on('end',()=>{
-               let rawData = Buffer.concat(dataBody).toString();
-               let readableData = queryString.parse(rawData);
-               console.log(readableData);
-            });
-            
-            resp.write('<h1>Data submit</h1>');
+               let dataBody = [];
+               req.on('data',(chunk)=>{
+                  dataBody.push(chunk);
+               });
+               
+               req.on('end',()=>{
+                  let rawData = Buffer.concat(dataBody).toString();
+                  let readableData = queryString.parse(rawData);
+                  console.log(readableData);
+                  console.log(`My name is ${readableData.name} and my email is ${readableData.email}`);
+               });
+
+               resp.write('<h1>Data submit</h1>');
          }
          resp.end();
    })
