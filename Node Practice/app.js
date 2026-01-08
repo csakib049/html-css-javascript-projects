@@ -1,8 +1,5 @@
-console.log("Start");
+const math = require('./math');
 
-setTimeout(() => {
-  console.log("Middle");
-}, 1000);
 
-console.log("End");
- 
+console.log(math.add(1,2));
+console.log(math.substract(1,2));
