@@ -1,18 +1,12 @@
-// const express = require('express');
-
 import express from 'express';
-import home from './pages/home.js';
-
-
-
 const app = express();
 
+app.use(express.json()); // to read JSON body
 
-app.listen(3200);
+app.post('/add', (req, res) => {
+    const { a, b } = req.body;
 
-
-app.get("",(req,resp)=>{
-    resp.send(home());
+    res.send(`Sum = ${a + b}`);
 });
 
-
+app.listen(3200);
