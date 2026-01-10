@@ -1,12 +1,21 @@
 import express from 'express';
-const app = express();
+import path from 'path';
 
-app.use(express.json()); // to read JSON body
+const app = express();  // convirts express function into an object 
 
-app.post('/add', (req, res) => {
-    const { a, b } = req.body;
+app.get('/',(req,resp)=>{
+    const abspath = path.resolve('view','home.html');
+    resp.sendFile(abspath);
+});
 
-    res.send(`Sum = ${a + b}`);
+app.get('/about',(req,resp)=>{
+    const abspath = path.resolve('view','about.html');
+    resp.sendFile(abspath);
+});
+
+app.get('/login',(req,resp)=>{
+    const abspath = path.resolve('view','login.html');
+    resp.sendFile(abspath);
 });
 
 app.listen(3200);
