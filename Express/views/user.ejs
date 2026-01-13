@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" href="/css/styles.css">
+    <title>Document</title>
 </head>
 <body>
-    <h1>This is home page </h1>
-
-    <a href="/about">Go to about page</a>
-    
+    <ul>
+        <% for(let i = 0; i<users.length ; i++) %>
+        <li> < %=user[i] %></li>
+        <%}%>
+    </ul>
 </body>
 </html>
