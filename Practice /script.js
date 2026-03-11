@@ -1,35 +1,34 @@
+// function api(){
+//     return new Promise((res,rej)=>{
+//           setTimeout(()=>{
+//             console.log("weather data");
+//             res(2);
+//           },2000);
+//     });
+// }
 
-const a=document.querySelector("h1");
+// async function getdata(){
+//     await api();
+// }
 
-console.log(a);
-
-var flag=0;
-
-a.addEventListener("click",function(){
-    if(flag==0){
-        console.log("Hi");
-        a.innerHTML="off "
-        a.style.color="red";
-        a.style.backgroundColor="pink";
-        flag=1;
-    }else{
-        console.log("Hi");
-        a.innerHTML="on!!!!!!"
-        a.style.color="pink";
-        a.style.backgroundColor="black";
-        flag=0;
-    }
-});
+// getdata();
 
 
-class parents{
-    sakin(){
-
-    }
+function api(){
+    return new Promise((res,rej)=>{
+        setTimeout(()=>{
+            console.log("weather data");
+            res(2);
+        },2000);
+    });
 }
 
-class child extends parents {
-    sakin(){
-        
-    }
+async function getdata(){
+    await api();
+    
 }
+
+getdata();
+
+
+//when i am calling the getData() funciton , inside the funciton there is another funcito called api(); the api() the await tells teh function getdata , " bro waite for 2 seconds i have called the function api() it should have send me promise . so please waite for 2 sec untill the promise gets rsolve or reject ."
