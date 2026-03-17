@@ -1,34 +1,52 @@
-// function api(){
-//     return new Promise((res,rej)=>{
-//           setTimeout(()=>{
-//             console.log("weather data");
-//             res(2);
-//           },2000);
-//     });
-// }
+class Person{
 
-// async function getdata(){
-//     await api();
-// }
+   /* constructor is a special function that runs automatically when you create a 
+   new object with new. You don't call it manually — JavaScript calls it for you. */
+    constructor(name,email){
 
-// getdata();
+        /* p1 and p2 bolte ja bujhay constructor er vitore  e {this} bolte o ak e
+         jinish bujahy. This always points the current object  {this.name → p1.name} */
+
+        this.name=name;
+        this.email=email;
+
+        console.log(this);
+        console.log(name);
+        console.log(email);
+    }
 
 
-function api(){
-    return new Promise((res,rej)=>{
-        setTimeout(()=>{
-            console.log("weather data");
-            res(2);
-        },2000);
-    });
+    ChangeName(name){
+       this.name=name; 
+    }
+
+    SendEmail(msg){
+      console.log("From:",this.email); // this.email it goes to the place where it is invoked and starts searching for email then it goes to the object and finds email 
+      console.log("sending mail to ",msg);
+      
+    }
+
+
+    print(){
+        console.log(this);
+    }
+
+
 }
 
-async function getdata(){
-    await api();
-    
-}
+const p1 = new Person("sakib","sakib@gmail.com");
+const p2 = new Person("shahriar","shahriar@gmail.com");
+//new is a keyword used to create an object from a class.
 
-getdata();
+p1.SendEmail("Zaman@gmail.com");
 
 
-//when i am calling the getData() funciton , inside the funciton there is another funcito called api(); the api() the await tells teh function getdata , " bro waite for 2 seconds i have called the function api() it should have send me promise . so please waite for 2 sec untill the promise gets rsolve or reject ."
+p1.ChangeName("Md sakib");
+p2.ChangeName("Md shahriar");
+
+
+p1.print();
+p2.print();
+
+
+
