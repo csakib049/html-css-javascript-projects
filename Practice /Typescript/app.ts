@@ -1,8 +1,13 @@
-var num1:number=24;
-var num2:number=10;
+interface Person{
+    name:string;
+    greet():string;
+}
 
-var num3:string="30saasdf";
+let user:Person={
+    name:"sakib",
+    greet(){
+        return "hello "+this.name;
+    }
+}
 
-var total:number=num1+num2+num3;
-
-console.log(total);
+console.log(user.greet());
