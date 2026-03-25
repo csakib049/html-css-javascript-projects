@@ -1,8 +1,8 @@
 "use strict";
-let user = {
-    name: "sakib",
-    greet() {
-        return "hello " + this.name;
-    }
-};
-console.log(user.greet());
+function getName() {
+    return new Promise((resolve, reject) => {
+        resolve("sakib");
+    });
+}
+console.log(getName());
+console.log(typeof getName());
