@@ -1,0 +1,15 @@
+
+
+.card{
+  background-color: #222;
+  margin-top: 100px;
+  color: aliceblue;
+  border: 2px solid cyan ;
+}
+
+
+.cardimage{
+  height: 100px;
+  width: 100px;
+  border: 2px solid pink;
+}
