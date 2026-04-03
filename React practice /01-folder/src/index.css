@@ -1,15 +1,7 @@
+@import "tailwindcss";
 
-
-.card{
-  background-color: #222;
-  margin-top: 100px;
-  color: aliceblue;
-  border: 2px solid cyan ;
+.btn1{
+    margin: 10px;
+    background-color: aqua;
 }
 
-
-.cardimage{
-  height: 100px;
-  width: 100px;
-  border: 2px solid pink;
-}
