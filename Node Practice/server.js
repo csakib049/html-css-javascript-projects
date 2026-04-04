@@ -1,17 +1,13 @@
-const app=require('./src/app.js'); 
+const app = require("./src/app.js");
+const connectDB = require("./src/db/db.js");
 
 
 
 
+connectDB() //calling connectDB to connect the server to database 
 
 
-
-
-
-
-
-
-app.listen(3000,()=>{  //server ke start kore 
-    console.log("server is running on port 3000");
-    
+//start server 
+app.listen(3000,()=>{ 
+    console.log("server is running on 3000");
 });
