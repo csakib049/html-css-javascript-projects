@@ -2,27 +2,33 @@ import React, { useState } from 'react'
 
 const App = () => {
 
+  const [title,setTitle]=useState('');
 
-  const [num,setNum]=useState(0);
-
-  function increaseNum(){
-    setNum(num+1);
-  }
-
-  function decreaseNum(){
-    setNum(num-1);
+  const submitHandler=(e)=>{
+     e.preventDefault();
+     console.log("form submited by ",title);
+     
+     setTitle('');
   }
 
 
   return (
-    <div>
+    <div> 
+       <form action="" onSubmit={(e)=>{
+            submitHandler(e);
+       }}>
+        <input 
+        type="text" 
+        placeholder='write a title ' 
+        value={title}
+        onChange={(e)=>{
+          setTitle(e.target.value);
+        }}
+        />
 
-      <h1>{`The value of num is ${num}`}</h1>
-
-      <button onClick={increaseNum}>Incease</button>
-
-      <button onClick={decreaseNum}>Decrease</button>
-
+        <button>submit</button>
+       </form>
+    
     </div>
   )
 }
