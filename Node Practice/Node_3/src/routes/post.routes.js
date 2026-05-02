@@ -4,8 +4,8 @@ const userModel = require("../models/user.model");
 
 const router = express.Router();
 
-
-router.post("/create", async(req, res) => {
+//         /api/posts/create
+router.post("/create", async (req, res) => {
 
 
     const token = req.cookies.token;

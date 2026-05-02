@@ -16,7 +16,7 @@ const userModel = mongoose.model("user", userSchema);
 "The line Create a model  called user using this schema in Mongoose”
 
 
-Even though you wrote "user" The MongoDB collection name becomes: "users"
+Even though you wrote "user" The MongoDB collection name becomes: "users" which is te collection
 
 */
 
