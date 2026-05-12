@@ -7,10 +7,11 @@ const postSchema = new mongoose.Schema({
 
 
 
+
 const postModel = mongoose.model("post", postSchema);
 /* "post" → Mongoose will automatically convert this into a 
  collection name:posts (plural) inside MongoDB */
 
-
+                   
 
 module.exports = postModel;
