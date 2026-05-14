@@ -22,3 +22,5 @@ authRouter.post("/logout-all",authController.logoutAll)
 
 
 export default authRouter;
+
+
