@@ -1,154 +1,124 @@
 //notes.controller.js
 
+const ApiError = require("../errors/ApiError");
 const Note = require("../models/note.model")
+const asyncHandler = require("../utils/asyncHandler")
 
 
-const deleteNote = async(req,res)=>{
-    try{
+const deleteNote = asyncHandler(async (req, res, next) => {
 
-        const noteId = req.params.id;
 
-        const deletedNote = await Note.findByIdAndDelete(noteId);
+    const noteId = req.params.id;
 
-        if(!deletedNote){
-            return res.status(404).json({
-                success: false,
-                message:"Note note found . "
-            })
+    const deletedNote = await Note.findByIdAndDelete(noteId);
+
+    if (!deletedNote) {
+        return next(new ApiError(404, "Note not found."))
+    }
+
+
+    res.status(200).json({
+        success: true,
+        message: "Note deleted successfully."
+    })
+
+});
+
+const updateNote = asyncHandler(async (req, res, next) => {
+
+
+    const noteId = req.params.id;
+
+
+
+
+    const updatedNote = await Note.findByIdAndUpdate(
+        noteId,
+        req.body,
+        {
+            new: true, // it makes sure mongodb could return freshly update value
+            runValidators: true, // it makes sure that the updated values are following mongodb schema 
         }
-
-        res.status(200).json({
-            success:true,
-            message:"Note deleted successfully."
-        })
+    );
 
 
-    }catch(err){
-          res.status(500).json({
-            success: false,
-            message: "Failed to delete Note."
-        })
+    if (!updatedNote) {
+        return next(new ApiError(404, "Note not found."))
     }
-}
+    
 
-const updateNote = async (req, res) => {
-    try {
+    res.status(200).json({
+        success: true,
+        message: "Note updated successfully.",
+        data: updatedNote
+    })
 
-        const noteId = req.params.id;
+});
 
-        const updatedNote = await Note.findByIdAndUpdate(
-            noteId,
-            req.body,
-            {
-                new: true, // it makes sure mongodb could return freshly update value
-                runValidators: true, // it makes sure that the updated values are following mongodb schema 
-            }
-        );
+const getSingleNotes = asyncHandler(async (req, res, next) => {
 
 
-        if (!updatedNote) {
-            return res.status(404).json({
-                success: false,
-                message: "Note not found . "
-            })
-        }
+    const noteId = req.params.id;
 
+    const note = await Note.findById(noteId);
 
-
-        res.status(200).json({
-            success: true,
-            message: "Note updated successfully.",
-            data: updatedNote
-        })
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to update Note."
-        })
+    if (!note) {
+        return next(new ApiError(404, "Note not found."))
     }
-}
 
-const getSingleNotes = async (req, res) => {
-    try {
-
-        const noteId = req.params.id;
-
-        const note = await Note.findById(noteId);
-
-        if (!note) {
-            return res.status(404).json({
-                success: false,
-                message: "Note not found"
-            })
-        }
+    res.status(200).json({
+        success: true,
+        data: note
+    })
 
 
-        res.status(200).json({
-            success: true,
-            data: note
-        })
+});
 
 
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch notes"
-        })
-    }
-}
 
-const getAllNotes = async (req, res) => {
 
-    try {
-        const notes = await Note.find();
 
-        res.status(200).json({
-            success: true,
-            count: notes.length,
-            data: notes,
-        })
+const getAllNotes = asyncHandler(async (req, res) => {
 
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch notes"
-        })
 
-    }
-}
+    const notes = await Note.find();
 
-const testAllNotes = (req, res) => {
+    res.status(200).json({
+        success: true,
+        count: notes.length,
+        data: notes
+    });
+
+});
+
+const testAllNotes = asyncHandler(async (req, res) => {
     res.send("Testing Notes routes .")
-}
+});
 
-const createNote = async (req, res) => {
-    try {
-        const { title, content } = req.body;
+const createNote = asyncHandler(async (req, res) => {
 
-        const newNote = await Note.create({
-            title,
-            content,
-        });
+    const { title, content } = req.body;
 
-        res.status(201).json({
-            success: true,
-            message: "Note created successfully. ",
-            data: newNote,
-        })
-    } catch (err) {
-        res.status(500).json({
-            success: false,
-            message: "Failed to fetch notes data . ",
-        })
-    }
+    const newNote = await Note.create({
+        title,
+        content,
+    });
 
-}
+    res.status(201).json({
+        success: true,
+        message: "Note created successfully. ",
+        data: newNote,
+    })
 
-module.exports = { 
-    getAllNotes, 
-    testAllNotes, 
-    createNote, 
+});
+
+
+
+module.exports = {
+    getAllNotes,
+    testAllNotes,
+    createNote,
     getSingleNotes,
     updateNote,
     deleteNote
-};
+}; 
