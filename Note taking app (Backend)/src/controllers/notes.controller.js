@@ -55,7 +55,7 @@ const updateNote = asyncHandler(async (req, res, next) => {
 
 });
 
-const getSingleNotes = asyncHandler(async (req, res, next) => {
+const getSingleNote = asyncHandler(async (req, res, next) => {
 
 
     const noteId = req.params.id;
@@ -118,7 +118,7 @@ module.exports = {
     getAllNotes,
     testAllNotes,
     createNote,
-    getSingleNotes,
+    getSingleNote,
     updateNote,
     deleteNote
 }; 

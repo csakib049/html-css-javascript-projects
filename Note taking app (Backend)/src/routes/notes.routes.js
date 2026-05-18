@@ -1,25 +1,28 @@
 //notes.routes.js
 
 const express = require("express");
-const router =express.Router();
+const router = express.Router();
+
+const { createNoteValidator } = require("../validators/note.validator");
+const validate = require("../middlewares/validate.middleware");
 
 
-const {getAllNotes,
+const { getAllNotes,
     testAllNotes,
     createNote,
-    getSingleNotes,
+    getSingleNote,
     updateNote,
     deleteNote
-}= require("../controllers/notes.controller");
+} = require("../controllers/notes.controller");
 
 //routes
-router.get("/test",testAllNotes);
-router.get("/",getAllNotes);
-router.get("/:id",getSingleNotes);
-router.post("/",createNote);
-router.put("/:id",updateNote);
-router.delete("/:id",deleteNote);
+router.get("/test", testAllNotes);
+router.get("/", getAllNotes);
+router.get("/:id", getSingleNote);
+router.post("/", createNoteValidator, validate, createNote);
+router.put("/:id", updateNote);
+router.delete("/:id", deleteNote);
 
 
 
-module.exports=router;
+module.exports = router;
