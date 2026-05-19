@@ -15,13 +15,17 @@ const { getAllNotes,
     deleteNote
 } = require("../controllers/notes.controller");
 
+
+const authMiddleware = require("../middlewares/auth.middleware");
+
 //routes
 router.get("/test", testAllNotes);
-router.get("/", getAllNotes);
-router.get("/:id", getSingleNote);
-router.post("/", createNoteValidator, validate, createNote);
-router.put("/:id", updateNote);
-router.delete("/:id", deleteNote);
+
+router.get("/", authMiddleware, getAllNotes);
+router.get("/:id", getSingleNote);                                 
+router.post("/", authMiddleware, createNoteValidator, validate, createNote);
+router.put("/:id", authMiddleware, updateNote);
+router.delete("/:id", authMiddleware, deleteNote);
 
 
 

@@ -10,7 +10,10 @@ const deleteNote = asyncHandler(async (req, res, next) => {
 
     const noteId = req.params.id;
 
-    const deletedNote = await Note.findByIdAndDelete(noteId);
+    const deletedNote = await Note.findByIdAndDelete({
+        _id: noteId,
+        owner: req.user._id
+    });
 
     if (!deletedNote) {
         return next(new ApiError(404, "Note not found."))
@@ -30,10 +33,11 @@ const updateNote = asyncHandler(async (req, res, next) => {
     const noteId = req.params.id;
 
 
-
-
     const updatedNote = await Note.findByIdAndUpdate(
-        noteId,
+        {
+            _id: noteId,
+            owner: req.user._id
+        },
         req.body,
         {
             new: true, // it makes sure mongodb could return freshly update value
@@ -45,7 +49,7 @@ const updateNote = asyncHandler(async (req, res, next) => {
     if (!updatedNote) {
         return next(new ApiError(404, "Note not found."))
     }
-    
+
 
     res.status(200).json({
         success: true,
@@ -60,7 +64,10 @@ const getSingleNote = asyncHandler(async (req, res, next) => {
 
     const noteId = req.params.id;
 
-    const note = await Note.findById(noteId);
+    const note = await Note.findOne({
+        _id: noteId,
+        owner: req.user._id
+    });
 
     if (!note) {
         return next(new ApiError(404, "Note not found."))
@@ -81,7 +88,9 @@ const getSingleNote = asyncHandler(async (req, res, next) => {
 const getAllNotes = asyncHandler(async (req, res) => {
 
 
-    const notes = await Note.find();
+    const notes = await Note.find({
+        owner: req.user._id
+    });
 
     res.status(200).json({
         success: true,
@@ -102,13 +111,14 @@ const createNote = asyncHandler(async (req, res) => {
     const newNote = await Note.create({
         title,
         content,
+        owner: req.user._id
     });
 
     res.status(201).json({
         success: true,
         message: "Note created successfully. ",
         data: newNote,
-    })
+    });
 
 });
 
