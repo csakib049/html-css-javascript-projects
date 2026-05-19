@@ -129,10 +129,40 @@ const refreshAccessToken = asyncHandler(async (req, res, next) => {
 });
 
 
+const logoutUser = asyncHandler(async (req, res, next) => {
+
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            refreshToken: null
+        },
+        {
+            new: true
+        }
+    );
+
+
+    res.clearCookies("refreshToken", {
+        httpOnly: true,
+        secure: false,
+        sameSite: "strict"
+    });
+
+
+    res.status(200).json({
+        success: true,
+        message: "Logout successfully."
+    });
+
+
+});
+
+
 
 
 module.exports = {
     registerUser,
     loginUser,
-    refreshAccessToken
+    refreshAccessToken,
+    logoutUser
 };
