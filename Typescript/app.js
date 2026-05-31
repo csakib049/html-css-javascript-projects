@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-class User {
-    name;
-    constructor(name) {
-        this.name = name;
+function abc(arg) {
+    if (typeof arg === "number") {
+        return "number";
     }
-    changeName() {
-        this.name = "sagol ";
+    else if (typeof arg === "string") {
+        return "string";
+    }
+    else {
+        throw new Error("Pagol hoye geso naki .....");
     }
 }
-let u1 = new User("sakib");
-u1.changeName();
-console.log(u1.name);
+console.log(abc(12));
+console.log(abc("sakib"));
+console.log(abc(true)); // this will throw an error 
 //# sourceMappingURL=app.js.map
