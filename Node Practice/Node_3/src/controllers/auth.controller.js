@@ -3,6 +3,8 @@ const jwt = require("jsonwebtoken"); //In simple terms, JWT is used to verify wh
 
 
 async function registerUser(req, res) {
+
+    
     const { username, email, password } = req.body;
     /*This data comes from the frontend, usually in JSON format.Frontend sends data to backend using a request (POST/PUT) in JSON formate and the backend receives it in req.body
     
@@ -24,6 +26,8 @@ async function registerUser(req, res) {
     }
 
 
+
+
     //you are creating a new user in your database using Mongoose 
     const user = await userModel.create({ //userModel: This is the schema/blueprint for your user data.
         username, email, password
@@ -37,9 +41,37 @@ async function registerUser(req, res) {
 
     if(!token){
         return res.status(400).json({
-            message:"Failded to create Token."
+            message:"Unauthorized."
         })
     }
+
+
+
+    try{
+        const decoded = jwt.verify(token,process.env.JWT_SECRET);
+
+
+        //remove this 
+        if(!decoded){
+            return res.status(401).json({
+                message:"Token is not found."
+            })
+        }
+
+
+        const user = await userModel.findOne({
+            _id:decoded.id
+        })
+    }catch(err){
+        return res.status(401).json({
+            message:"Token is invalid."
+        })
+    }
+
+
+
+
+    
 
 
     //           "key",value
@@ -49,10 +81,16 @@ async function registerUser(req, res) {
     res.status(201).json({
         message: "User registered successfully",
         user,
-        token
-
+    
     })
 }
 
 
 module.exports = { registerUser }
+
+
+
+
+
+
+
