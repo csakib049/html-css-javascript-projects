@@ -36,11 +36,12 @@ async function postUser(req, res) {
 
 
 
-
-
-
-    res.send("post created successfully")
+    res.status(200).json({
+        message:"Post created successfully. "
+    })
 }
 
 
 module.exports = { postUser }
+
+

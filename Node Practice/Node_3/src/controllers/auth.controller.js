@@ -51,14 +51,6 @@ async function registerUser(req, res) {
         const decoded = jwt.verify(token,process.env.JWT_SECRET);
 
 
-        //remove this 
-        if(!decoded){
-            return res.status(401).json({
-                message:"Token is not found."
-            })
-        }
-
-
         const user = await userModel.findOne({
             _id:decoded.id
         })
