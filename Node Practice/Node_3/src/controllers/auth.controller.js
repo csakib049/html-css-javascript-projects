@@ -39,10 +39,10 @@ async function registerUser(req, res) {
         id: user._id
     }, process.env.JWT_SECRET);
 
+    
+
     if(!token){
-        return res.status(400).json({
-            message:"Unauthorized."
-        })
+        return res.status(400).json({message:"user is unauthorized."})
     }
 
 
